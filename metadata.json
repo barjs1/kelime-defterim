@@ -1,0 +1,7 @@
+{
+  "name": "Kelime Defterim",
+  "description": "İngilizce bilmediğiniz kelimeleri örnek cümlelerle kaydedin, seviyelerine göre gruplandırın, aralıklı tekrar (SRS) ile kalıcı hale getirin ve grafiklerle takip edin.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "User": {
+      "collection": "users",
+      "fields": {
+        "uid": { "type": "string", "description": "Unique user ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "dailyGoal": { "type": "number", "description": "Daily word review goal" },
+        "preferredVoice": { "type": "string", "description": "TTS voice language code" },
+        "speechRate": { "type": "number", "description": "Audio pronunciation speed" },
+        "updatedAt": { "type": "string", "description": "Last update timestamp" }
+      },
+      "rules": {
+        "read": "request.auth != null && request.auth.uid == resource.id",
+        "write": "request.auth != null && request.auth.uid == resource.id"
+      }
+    },
+    "Word": {
+      "collection": "users/{userId}/words",
+      "fields": {
+        "word": { "type": "string", "description": "English word or phrase" },
+        "meaning": { "type": "string", "description": "Turkish meaning" },
+        "sentence": { "type": "string", "description": "Example English sentence" },
+        "sentenceMeaning": { "type": "string", "description": "Turkish translation of example sentence" },
+        "level": { "type": "string", "description": "CEFR level (A1, A2, B1, B2, C1, C2)" },
+        "partOfSpeech": { "type": "string", "description": "Grammatical category" },
+        "phonetic": { "type": "string", "description": "Phonetic pronunciation" },
+        "notes": { "type": "string", "description": "Mnemonic or usage notes" },
+        "tags": { "type": "array", "description": "Word categories/tags" },
+        "folderId": { "type": "string", "description": "ID of parent custom folder" },
+        "easinessFactor": { "type": "number", "description": "SM-2 easiness factor" },
+        "interval": { "type": "number", "description": "Days until next review" },
+        "repetitionCount": { "type": "number", "description": "Consecutive successful reviews" },
+        "nextReviewDate": { "type": "string", "description": "ISO date for next repetition" },
+        "lastReviewDate": { "type": "string", "description": "ISO date of last review" },
+        "masteryStatus": { "type": "string", "description": "learning | mastered | new" },
+        "totalReviews": { "type": "number", "description": "Total review count" },
+        "lapses": { "type": "number", "description": "Number of memory lapses" },
+        "createdAt": { "type": "number", "description": "Creation timestamp in ms" }
+      },
+      "rules": {
+        "read": "request.auth != null && request.auth.uid == userId",
+        "write": "request.auth != null && request.auth.uid == userId"
+      }
+    },
+    "Folder": {
+      "collection": "users/{userId}/folders",
+      "fields": {
+        "name": { "type": "string", "description": "Folder name" },
+        "color": { "type": "string", "description": "Color theme code" },
+        "description": { "type": "string", "description": "Folder description" },
+        "createdAt": { "type": "number", "description": "Creation timestamp in ms" },
+        "updatedAt": { "type": "number", "description": "Update timestamp in ms" }
+      },
+      "rules": {
+        "read": "request.auth != null && request.auth.uid == userId",
+        "write": "request.auth != null && request.auth.uid == userId"
+      }
+    },
+    "Activity": {
+      "collection": "users/{userId}/activity",
+      "fields": {
+        "date": { "type": "string", "description": "YYYY-MM-DD date" },
+        "count": { "type": "number", "description": "Reviews completed on this day" },
+        "correct": { "type": "number", "description": "Successful recalls" },
+        "streak": { "type": "number", "description": "Current consecutive streak days" }
+      },
+      "rules": {
+        "read": "request.auth != null && request.auth.uid == userId",
+        "write": "request.auth != null && request.auth.uid == userId"
+      }
+    }
+  }
+}
